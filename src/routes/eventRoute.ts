@@ -12,9 +12,9 @@ router.get("/", async(req, res) => {
     try {
         const result = await service.getAllEventsWithPagination(keyword, pageSize, pageNo);
         if (result.events.length === 0) {
-        res.status(404).send("No events found");
-        return;
-        }
+            res.status(404).send("No events found");
+            return;
+        } 
         res.setHeader("X-Total-Count", result.count.toString());
         res.json(result.events);
     } catch (error) {
@@ -22,9 +22,13 @@ router.get("/", async(req, res) => {
         res.status(400).send("Invalid page number or page size");
         } else {
         res.status(500).send("Internal Server Error");}
+    } finally {
+        console.log(`Request is completed. with pageNo=${pageNo} and pageSize=${pageSize}`);
     }
     return;
-    } else if (req.query.category) {
+    } 
+
+    else if (req.query.category) {
     const category = req.query.category;
     const filteredEvents = await service.getEventByCategory(category as string);
     res.json(filteredEvents);
