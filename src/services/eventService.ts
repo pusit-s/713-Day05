@@ -16,3 +16,7 @@ export function getEventById(id: number) {
 export function addEvent(newEvent: Event) {
   return repo.addEvent(newEvent);
 }
+
+export function getAllEventsWithOrganizerPagination(page: number, pageSize: number) {
+  return repo.getAllEventsWithOrganizerPagination(page, pageSize);
+}
