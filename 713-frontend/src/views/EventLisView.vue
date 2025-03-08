@@ -10,8 +10,11 @@ const events = ref([
 
 
 <template>
-  <div></div>
   <div>
-    <EventCard v-for="event in events" :key="event.id" />
+    <div v-if="events.length === 0">No events</div>
+    <div v-else-if="events.length === 1">Only one event</div>
+    <div v-else>
+      <EventCard v-for="event in events" :key="event.id" />
+    </div>
   </div>
 </template>
