@@ -29,6 +29,7 @@ watchEffect(() => {
     .getEvents(page.value, 2)
     .then((response) => {
       events.value = response.data
+      totalEvents.value = response.headers['x-total-count'];
     })
     .catch(() => {
       router.push({ name: 'network-error-view' })})
@@ -37,7 +38,6 @@ watchEffect(() => {
 
 eventService.getEvents(page.value, 2).then((response: EventResponse) => {
   events.value = response.data;
-  totalEvents.value = response.headers['x-total-count'];
 })
 </script>
 
