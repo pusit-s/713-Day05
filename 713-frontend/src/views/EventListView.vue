@@ -9,7 +9,7 @@ const router = useRouter()
 const events = ref<Event[]>([]);
 const totalEvents = ref(0);
 const hasNextPage = computed(() => {
-  const totalPages = Math.ceil(totalEvents.value / 2);
+  const totalPages = Math.ceil(totalEvents.value / 3);
   return page.value < totalPages;
 })
 
@@ -26,7 +26,7 @@ const page = computed(() => props.page);
 
 watchEffect(() => {
   eventService
-    .getEvents(page.value, 2)
+    .getEvents(page.value, 3)
     .then((response) => {
       events.value = response.data
       totalEvents.value = response.headers['x-total-count'];
@@ -36,7 +36,7 @@ watchEffect(() => {
 
 })
 
-eventService.getEvents(page.value, 2).then((response: EventResponse) => {
+eventService.getEvents(page.value, 3).then((response: EventResponse) => {
   events.value = response.data;
 })
 </script>
