@@ -26,12 +26,7 @@ router.get("/", async(req, res) => {
         console.log(`Request is completed. with pageNo=${pageNo} and pageSize=${pageSize}`);
     }
     return;
-    
-
-  
-    
 });
-
 
 router.get("/:id", async (req, res) => {
     const id = parseInt(req.params.id);
