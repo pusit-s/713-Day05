@@ -2,9 +2,12 @@
 import { ref } from 'vue'
 import type { Event } from '@/types'
 import eventService from '@/services/EventService'
+
 const event = ref<Event>()
-const id = ref<number>(1)
-eventService.getEvent(id.value).then((response) => {
+const props = defineProps< {id: string} > ()
+const id = Number(props.id)
+
+eventService.getEvent(id).then((response) => {
   event.value = response.data
 })
 .catch((error: Error) => {
