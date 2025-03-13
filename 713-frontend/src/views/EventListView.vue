@@ -3,7 +3,9 @@ import EventCard from '@/components/EventCard.vue';
 import { ref, computed, watchEffect } from 'vue';
 import eventService from '@/services/EventService';
 import type { Event } from '@/types';
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const events = ref<Event[]>([]);
 const totalEvents = ref(0);
 const hasNextPage = computed(() => {
@@ -28,9 +30,9 @@ watchEffect(() => {
     .then((response) => {
       events.value = response.data
     })
-    .catch((error) => {
-      console.error('There was an error!', error)
-    })
+    .catch(() => {
+      router.push({ name: 'network-error-view' })})
+
 })
 
 eventService.getEvents(page.value, 2).then((response: EventResponse) => {
