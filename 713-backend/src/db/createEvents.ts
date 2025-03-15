@@ -141,7 +141,24 @@ export async function createEvents() {
       },
       roles: {
         connect: [
-          {id: roleAdmin.id}
+          {id: roleAdmin.id},
+          {id: roleUser.id}
+        ]
+      }
+    }
+  })
+  const user2 = await prisma.user.create({
+    data: {
+      username: 'user2@abc.com',
+      password: bcrypt.hashSync('password2', numSaltAround),
+      organizer: {
+        connect: {
+          id: cmuOrg.id
+        }
+      },
+      roles: {
+        connect: [
+          {id: roleUser.id}
         ]
       }
     }
