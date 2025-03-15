@@ -7,7 +7,7 @@ import authRoute from './routes/authRoute';
 
 import { uploadFile } from './services/uploadFileService';
 const app = express();
-const allowedOrigins = ['http://localhost:5173','https://331-2024-vercel-vue-teal.vercel.app/'];
+const allowedOrigins = ['http://localhost:5173','https://331-2024-vercel-vue-teal.vercel.app'];
 
 const options: cors.CorsOptions = {
   origin: allowedOrigins,
