@@ -61,3 +61,14 @@ export async function registerUser(organizerName: string, username: string, pass
         }
 });
 }
+
+export function updatePassword(userId: number, password: string){
+    return prisma.user.update({
+        where: {
+            id: userId
+        },
+        data: {
+            password: password
+        }
+    });
+}

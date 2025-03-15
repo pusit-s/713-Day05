@@ -69,4 +69,24 @@ router.post('/register', async (req, res) => {
     }
 })
 
+router.post('/updatePassword', authMiddleware.protect, async (req, res) => {
+    const userId = req.body.user.id;
+    const {password} = req.body;
+    try {
+        await authService.updatePassword(userId, password);
+        res.status(200).json({
+            status: 'success',
+            user: {
+                id: userId,
+                organizerName: req.body.user.organizer?.name || 'unknown',
+                username: userId.username,
+                roles: userId.roles.map((role: role) => role.name)
+            }
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({status: 'error', message: 'Internal server error'});
+    }
+})
+
 export default router;
