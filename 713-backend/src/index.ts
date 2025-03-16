@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import eventRoute from './routes/eventRoute';
 import authRoute from './routes/authRoute';
+import participantRoute from './routes/participantRoute';
 
 import { uploadFile } from './services/uploadFileService';
 const app = express();
@@ -17,6 +18,7 @@ dotenv.config();
 app.use(cors(options));
 app.use(express.json());
 app.use('/events',eventRoute);
+app.use('/participants',participantRoute);
 app.use('/api/v1/auth',authRoute);
 
 const port = process.env.PORT || 3000;
