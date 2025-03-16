@@ -28,4 +28,22 @@ router.get("/", async(req, res) => {
     return;
 });
 
+router.get("/:id", async(req, res) => {
+    const id = parseInt(req.params.id);
+    try {
+        const result = await service.getParticipantById(id);
+        if (result === null) {
+            res.status(404).send("Participant not found");
+            return;
+        }
+        res.json(result);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Internal Server Error");
+    } finally {
+        console.log(`Request is completed. with id=${id}`);
+    }
+    return;
+});
+
 export default router;

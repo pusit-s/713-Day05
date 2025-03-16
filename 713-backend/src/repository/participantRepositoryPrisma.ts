@@ -7,6 +7,12 @@ export function getAllParticipants() {
     return prisma.participant.findMany();
 }
 
+export function getParticipantById(id: number) {
+    return prisma.participant.findUnique({
+        where: { id }
+    });
+}
+
 export async function getAllParticipantsWithEventsPagination(pageSize: number, pageNo: number) {
     const participants = await prisma.participant.findMany({
         skip: (pageNo - 1) * pageSize,
